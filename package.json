@@ -1,0 +1,16 @@
+{
+  "name": "talenta-clocker",
+  "version": "0.1.0",
+  "description": "Clock-in and clock-out to Talenta",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "keywords": ["talenta", "live attendance", "clock-in", "clock-out"],
+  "author": "Krisantus Wanandi",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.38.1",
+    "@types/node": "^20.8.2"
+  }
+}
