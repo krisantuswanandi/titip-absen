@@ -1,18 +1,27 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test("Clock out", async ({ page }) => {
+  // set geolocation
+  const browserContext = await page.context();
+  await browserContext.grantPermissions(["geolocation"]);
+  await browserContext.setGeolocation({
+    latitude: +process.env.TALENTA_LATITUDE!,
+    longitude: +process.env.TALENTA_LONGITUDE!,
+  });
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  // login mekari
+  await page.goto("https://account.mekari.com/users/sign_in");
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.getByLabel("Email").click();
+  await page.getByLabel("Email").fill(process.env.TALENTA_USERNAME!);
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  await page.getByLabel("Password").click();
+  await page.getByLabel("Password").fill(process.env.TALENTA_PASSWORD!);
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+
+  // attendance page
+  await page.goto("https://hr.talenta.co/live-attendance");
+
+  await expect(page.getByText("Attendance log")).toBeVisible();
 });
