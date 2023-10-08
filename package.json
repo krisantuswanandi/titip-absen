@@ -4,9 +4,15 @@
   "description": "Clock-in and clock-out to Talenta",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test"
+    "clock-in": "playwright test clock-in",
+    "clock-out": "playwright test clock-out"
   },
-  "keywords": ["talenta", "live attendance", "clock-in", "clock-out"],
+  "keywords": [
+    "talenta",
+    "live attendance",
+    "clock-in",
+    "clock-out"
+  ],
   "author": "Krisantus Wanandi",
   "license": "ISC",
   "devDependencies": {

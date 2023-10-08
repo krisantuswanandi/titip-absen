@@ -1,0 +1,24 @@
+name: Clock Out
+on:
+  schedule:
+    - cron: "1 11 * * MON-FRI"
+env:
+  TALENTA_USERNAME: ${{ secrets.TALENTA_USERNAME }}
+  TALENTA_PASSWORD: ${{ secrets.TALENTA_PASSWORD }}
+  TALENTA_LATITUDE: ${{ secrets.TALENTA_LATITUDE }}
+  TALENTA_LONGITUDE: ${{ secrets.TALENTA_LONGITUDE }}
+jobs:
+  clock-out:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.38.1-jammy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Playwright tests
+        run: npm run clock-out

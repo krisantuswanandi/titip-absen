@@ -1,13 +1,14 @@
-name: Playwright Tests
+name: Clock In
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "11 1 * * MON-FRI"
 env:
   TALENTA_USERNAME: ${{ secrets.TALENTA_USERNAME }}
   TALENTA_PASSWORD: ${{ secrets.TALENTA_PASSWORD }}
   TALENTA_LATITUDE: ${{ secrets.TALENTA_LATITUDE }}
   TALENTA_LONGITUDE: ${{ secrets.TALENTA_LONGITUDE }}
 jobs:
-  test:
+  clock-in:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     container:
@@ -20,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run Playwright tests
-        run: npm run test
+        run: npm run clock-in

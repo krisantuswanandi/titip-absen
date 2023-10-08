@@ -1,13 +1,14 @@
-import { test, expect } from "@playwright/test";
+import type { Page } from "@playwright/test";
 
-test("Clock out", async ({ page }) => {
+export async function goToLiveAttendance(page: Page) {
+  // get location, default to mid plaza
+  const latitude = +(process.env.TALENTA_LATITUDE || -6.2091836);
+  const longitude = +(process.env.TALENTA_LONGITUDE || 106.8204816);
+
   // set geolocation
   const browserContext = await page.context();
   await browserContext.grantPermissions(["geolocation"]);
-  await browserContext.setGeolocation({
-    latitude: +process.env.TALENTA_LATITUDE!,
-    longitude: +process.env.TALENTA_LONGITUDE!,
-  });
+  await browserContext.setGeolocation({ latitude, longitude });
 
   // login mekari
   await page.goto("https://account.mekari.com/users/sign_in");
@@ -18,10 +19,8 @@ test("Clock out", async ({ page }) => {
   await page.getByLabel("Password").click();
   await page.getByLabel("Password").fill(process.env.TALENTA_PASSWORD!);
 
-  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await page.getByRole("button", { name: "Sign in" }).click();
 
   // attendance page
   await page.goto("https://hr.talenta.co/live-attendance");
-
-  await expect(page.getByText("Attendance log")).toBeVisible();
-});
+}
