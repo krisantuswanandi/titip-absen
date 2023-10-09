@@ -1,5 +1,6 @@
 name: Clock In
 on:
+  workflow_dispatch:
   schedule:
     - cron: "11 0 * * MON-FRI"
 env:
