@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "clock-in": "playwright test clock-in",
-    "clock-out": "playwright test clock-out"
+    "clock-out": "playwright test clock-out",
+    "debug": "playwright test debug"
   },
   "keywords": [
     "talenta",

@@ -1,4 +1,4 @@
-name: Clock Out
+name: Debug
 on:
   workflow_dispatch:
 env:
@@ -7,7 +7,7 @@ env:
   TALENTA_LATITUDE: ${{ secrets.TALENTA_LATITUDE }}
   TALENTA_LONGITUDE: ${{ secrets.TALENTA_LONGITUDE }}
 jobs:
-  clock-out:
+  debug:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     container:
@@ -20,4 +20,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run Playwright tests
-        run: npm run clock-out
+        run: npm run debug
