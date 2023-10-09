@@ -19,7 +19,7 @@ export async function goToLiveAttendance(page: Page) {
   await page.getByLabel("Password").click();
   await page.getByLabel("Password").fill(process.env.TALENTA_PASSWORD!);
 
-  await page.getByRole("button", { name: "Sign in" }).click();
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
 
   // attendance page
   await page.goto("https://hr.talenta.co/live-attendance");

@@ -1,7 +1,7 @@
 name: Clock In
 on:
   schedule:
-    - cron: "11 1 * * MON-FRI"
+    - cron: "11 0 * * MON-FRI"
 env:
   TALENTA_USERNAME: ${{ secrets.TALENTA_USERNAME }}
   TALENTA_PASSWORD: ${{ secrets.TALENTA_PASSWORD }}
