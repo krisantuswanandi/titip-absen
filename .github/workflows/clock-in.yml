@@ -23,3 +23,9 @@ jobs:
         run: npm ci
       - name: Run Playwright tests
         run: npm run clock-in
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: Test Results
+          path: test-results/
+          retention-days: 2
