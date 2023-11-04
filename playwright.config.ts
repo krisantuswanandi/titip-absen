@@ -6,7 +6,7 @@ export default defineConfig({
   forbidOnly: true,
   retries: 0,
   workers: 1,
-  use: { video: "on" },
+  use: { video: "retain-on-failure" },
   projects: [
     {
       name: "chromium",
