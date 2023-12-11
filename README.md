@@ -1,4 +1,4 @@
-# Talenta Clocker
+# Titip Absen
 
 Automatically clock in and clock out on Talenta.
 
