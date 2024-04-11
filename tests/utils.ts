@@ -1,4 +1,5 @@
 import type { Page } from "@playwright/test";
+import ignoredDates from "./ignore.json";
 
 export async function goToLiveAttendance(page: Page) {
   // get location, default to mid plaza
@@ -24,4 +25,11 @@ export async function goToLiveAttendance(page: Page) {
   // attendance page
   await page.goto("https://hr.talenta.co");
   await page.getByText("Live attendance", { exact: true }).click();
+}
+
+export function skip() {
+  const offsetWib = 420 * 60 * 1000;
+  const todayWib = new Date(Date.now() + offsetWib);
+  const dateWib = todayWib.toISOString().split("T")[0];
+  return ignoredDates.includes(dateWib);
 }
