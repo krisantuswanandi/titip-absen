@@ -3,8 +3,8 @@ import ignoredDates from "./ignore.json";
 
 export async function goToLiveAttendance(page: Page) {
   // get location, default to mid plaza
-  const latitude = +(process.env.TALENTA_LATITUDE || -6.2091836);
-  const longitude = +(process.env.TALENTA_LONGITUDE || 106.8204816);
+  const latitude = +(process.env.TALENTA_LATITUDE || -6.2091883);
+  const longitude = +(process.env.TALENTA_LONGITUDE || 106.8204898);
 
   // set geolocation
   const browserContext = await page.context();
