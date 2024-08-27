@@ -16,8 +16,8 @@
   "author": "Krisantus Wanandi",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.38.1",
-    "@types/node": "^20.8.2",
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.0",
     "dotenv": "^16.4.5"
   }
 }
