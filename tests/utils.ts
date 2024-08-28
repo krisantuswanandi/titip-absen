@@ -3,8 +3,7 @@ import { readFileSync } from "fs";
 import type { Page } from "@playwright/test";
 
 export async function goToLiveAttendance(page: Page) {
-  const latitude = +process.env.TALENTA_LATITUDE!;
-  const longitude = +process.env.TALENTA_LONGITUDE!;
+  const { latitude, longitude } = getLocation();
 
   // set geolocation
   const browserContext = await page.context();
@@ -39,3 +38,18 @@ function todayIs(file: string) {
 }
 
 export const isIgnored = () => todayIs("./data/ignore");
+export const isWfo = () => todayIs("./data/wfo");
+
+export function getLocation() {
+  const latitude = isWfo()
+    ? process.env.TALENTA_LATITUDE_WFO
+    : process.env.TALENTA_LATITUDE_WFH;
+  const longitude = isWfo()
+    ? process.env.TALENTA_LONGITUDE_WFO
+    : process.env.TALENTA_LONGITUDE_WFH;
+
+  return {
+    latitude: Number(latitude),
+    longitude: Number(longitude),
+  };
+}
