@@ -1,10 +1,11 @@
 import type { Page } from "@playwright/test";
 import ignoredDates from "./ignore.json";
 
+import "dotenv/config";
+
 export async function goToLiveAttendance(page: Page) {
-  // get location, default to mid plaza
-  const latitude = +(process.env.TALENTA_LATITUDE || -6.2091883);
-  const longitude = +(process.env.TALENTA_LONGITUDE || 106.8204898);
+  const latitude = +process.env.TALENTA_LATITUDE!;
+  const longitude = +process.env.TALENTA_LONGITUDE!;
 
   // set geolocation
   const browserContext = await page.context();
@@ -28,8 +29,6 @@ export async function goToLiveAttendance(page: Page) {
 }
 
 export function skip() {
-  const offsetWib = 420 * 60 * 1000;
-  const todayWib = new Date(Date.now() + offsetWib);
-  const dateWib = todayWib.toISOString().split("T")[0];
+  const dateWib = new Date().toISOString().split("T")[0];
   return ignoredDates.includes(dateWib);
 }

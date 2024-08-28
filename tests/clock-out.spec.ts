@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { goToLiveAttendance, skip } from "./utils";
 
+import "dotenv/config";
+
 test("Clock Out", async ({ page }) => {
   if (skip()) return;
   await goToLiveAttendance(page);
