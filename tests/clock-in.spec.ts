@@ -1,10 +1,9 @@
-import { test, expect } from "@playwright/test";
-import { goToLiveAttendance, skip } from "./utils";
-
 import "dotenv/config";
+import { test, expect } from "@playwright/test";
+import { goToLiveAttendance, isIgnored } from "./utils";
 
 test("Clock In", async ({ page }) => {
-  if (skip()) return;
+  if (isIgnored()) return;
   await goToLiveAttendance(page);
 
   await page.getByText("Clock In", { exact: true }).click();

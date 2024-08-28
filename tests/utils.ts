@@ -1,7 +1,6 @@
-import type { Page } from "@playwright/test";
-import ignoredDates from "./ignore.json";
-
 import "dotenv/config";
+import { readFileSync } from "fs";
+import type { Page } from "@playwright/test";
 
 export async function goToLiveAttendance(page: Page) {
   const latitude = +process.env.TALENTA_LATITUDE!;
@@ -28,7 +27,15 @@ export async function goToLiveAttendance(page: Page) {
   await page.getByText("Live attendance", { exact: true }).click();
 }
 
-export function skip() {
-  const dateWib = new Date().toISOString().split("T")[0];
-  return ignoredDates.includes(dateWib);
+function todayIs(file: string) {
+  try {
+    const content = readFileSync(file, "utf-8");
+    const dates = content.split("\n");
+    const today = new Date().toISOString().split("T")[0];
+    return dates.includes(today);
+  } catch {
+    return false;
+  }
 }
+
+export const isIgnored = () => todayIs("./data/ignore");
